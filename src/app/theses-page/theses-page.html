@@ -1,0 +1,57 @@
+<form class="flex flex-col justify-evenly h-full">
+  @for (thesis of theses; track $index) {
+    <div class="w-3/4 m-auto" [class.hidden]="$index !== current_view()">
+      <app-thesis
+        class="m-auto w-3/4"
+        [thesis]="thesis"
+        [form]="theses_form[$index]" />
+    </div>
+  }
+
+  @let view = current_view();
+  @if (view === "confirm") {
+    <ul>
+      @for (thesis of theses; track $index) {
+        <li>
+          <span>{{ $index + 1 }}</span>
+          <span>{{ thesis.text }}</span>
+          @switch (theses_form[$index]().value()) {
+
+          }
+        </li>
+      }
+    </ul>
+  } @else {
+    <!-- Pagination -->
+    <div class="flex flex-row gap-x-4">
+      <button
+        (click)="skip_thesis($event)"
+        class="border border-neutral-200 group cursor-pointer  hover:bg-neutral-100 w-max px-4 py-2 rounded-xl mx-auto"
+      >
+        <span>Stelling overslaan</span>
+        <fa-icon class="inline-block transition-all ml-1 group-hover:scale-110" [icon]="faXmark" />
+      </button>
+
+      @for (thesis of theses; track $index) {
+        <button
+          (click)="navigate_to($event, $index)"
+          [disabled]="$index === view"
+          class="disabled:cursor-not-allowed cursor-pointer border rounded hover:border-[#FFCD00] hover:bg-neutral-100 px-4"
+          [ngClass]="{ 'border-[#FFCD00]': $index === view, 'border-neutral-200': $index !== view }"
+        >
+          {{ $index + 1 }}
+        </button>
+      }
+
+      <!-- TODO: Make button green when something has been filled out -->
+      <button
+        [disabled]="theses_form[view]().value() === null"
+        (click)="next_thesis($event)"
+        class="border border-neutral-200 group cursor-pointer  not-disabled:hover:bg-neutral-100 w-max px-4 py-2 rounded-xl mx-auto disabled:cursor-not-allowed disabled:bg-neutral-300"
+      >
+        <span>Volgende stelling</span>
+        <fa-icon class="inline-block transition-all ml-1 group-hover:translate-x-1" [icon]="faArrowRight" />
+      </button>
+    </div>
+  }
+</form>
