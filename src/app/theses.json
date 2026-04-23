@@ -1,0 +1,79 @@
+{
+  "theses": [
+    [
+      {
+        "nl": "De ",
+        "en": "The "
+      },
+      {
+        "text": {
+          "nl": "Haskell Foundation",
+          "en": "Haskell Foundation"
+        },
+        "explanation": {
+          "nl": "Organisatie die Haskell beheert.",
+          "en": "Organisation that manages Haskell."
+        }
+      },
+      {
+        "nl": " moet afhankelijke types toevoegen aan Haskell.",
+        "en": " should add dependent types to Haskell."
+      }
+    ],
+    [
+      {
+        "nl": "Koffie op de UU moet gratis worden voor alle studenten.",
+        "en": "Coffee at UU should be free for all students."
+      }
+    ]
+  ],
+  "parties": [
+    {
+      "name": "Lynn voor UU",
+      "answers": [
+        { "answer": -2, "explanation": [] },
+        { "answer": -1, "explanation": [] }
+      ]
+    },
+    {
+      "name": "R.O.B.I.N.",
+      "answers": [
+        {
+          "answer": -2,
+          "explanation": [
+            {
+              "nl": "Afhankelijke types zijn moeilijker te inferreren en dat gaat volgens ons tegen de essentie van Haskell in. Bovendien zijn er nog geen praktische manieren ontwikkeld om talen met afhankelijke types te compileren, wat de redelijk goede runtime van Haksell benadeelt.",
+              "en": "Dependent types are harder to infer and that conflicts with the essence of Haskell according to us. Additionally, there are no practical ways to compile languages with dependent types which is detrimental to Haskell's relatively good runtime performance."
+            }
+          ]
+        },
+        {
+          "answer": 2,
+          "explanation": [
+            {
+              "nl": "Koffie is een belangrijke drank om studenten en medewerkers efficient te kunnen laten werken. Wij vinden dat de UU dit moet promoten, door koffie te verschaffen op haar kosten.",
+              "en": "Coffee is an important drink to keep students and employees efficient at their work. We believe that the UU should promote this by providing coffee on their cost."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Partij Terra",
+      "answers": [
+        {
+          "answer": 2,
+          "explanation": [
+            { "nl": "Afhankelijk types net", "en": "Dependent types neat" }
+          ]
+        },
+        {
+          "answer": 2,
+          "explanation": [
+            { "nl": "Heb koffie nodig voor programmeren", "en": "Need coffee for programming" }
+          ]
+        }
+      ]
+    }
+  ]
+}

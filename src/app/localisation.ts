@@ -6,5 +6,5 @@ type Locale = "en" | "nl";
   providedIn: 'root',
 })
 export class Localisation {
-  current_language = signal<Locale>("nl");
+  current_language = signal<Locale>("en");
 }

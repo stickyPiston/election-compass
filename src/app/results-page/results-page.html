@@ -1,1 +1,58 @@
-<p>results-page works!</p>
+<div class="w-3/4 mx-auto mb-4">
+  <div class="flex flex-col my-4">
+    <h2 class="font-bold text-2xl">{{ texts['results'] | localised }}</h2>
+    <p>
+      {{ texts['subtitle_1'] | localised }}
+      <a [href]="texts['similarity_link'] | localised" class="underline text-blue-500">{{ texts['cosine_similarity'] | localised }}</a>
+      {{ texts['subtitle_2'] | localised }} {{ answered_count() }}
+      {{ texts['subtitle_3'] | localised }}
+    </p>
+  </div>
+
+  <ol class="flex flex-col gap-y-4">
+    @for (party of sorted_parties(); track $index) {
+      <li>
+        <div class="flex flex-row border border-neutral-200 gap-x-4 h-12">
+          <div class="w-12 h-full bg-[#66718c] grid">
+            <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
+          </div>
+          <span class="my-auto w-full">
+            {{ party.name }} ({{ percentage(party.similarity) }}% {{ texts['match'] | localised }})
+          </span>
+          <span class="w-12 h-full bg-[#66718c] grid cursor-pointer" (click)="toggle_explanation($index)">
+            <fa-icon class="m-auto text-white" [icon]="opened()[$index] ? faChevronUp : faChevronDown" />
+          </span>
+        </div>
+        @if (opened()[$index]) {
+          <ol class="border-l border-r border-b border-neutral-200 flex flex-col gap-y-4 py-4">
+            @for (thesis of theses; track $index) {
+              <li class="bg-neutral-100 mx-4 border border-neutral-300 px-4 py-4 flex flex-row gap-x-4">
+                @let own_answer = theses_service.own_answers()[$index]!;
+                @let party_answer = party.answers[$index].answer;
+                @let icon = similarity_icon(own_answer, party_answer);
+                <fa-icon [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                <div class="w-full flex flex-col gap-y-2">
+                  <app-thesis-text [text]="thesis" />
+                  <hr class="border-neutral-200">
+                  <div class="grid grid-cols-2">
+                    <div>
+                      <span class="text-neutral-600">{{ texts['your_answer'] | localised }}: </span>
+                      <span>{{ answer_text(own_answer) | localised }}</span>
+                    </div>
+                    <div>
+                      <span class="text-neutral-600">{{ party.name }}'s {{ texts['answer'] | localised }}: </span>
+                      <span>{{ answer_text(party_answer) | localised }}</span>
+                    </div>
+                  </div>
+                  <hr class="border-neutral-200">
+                  <span class="text-neutral-600">{{ party.name }}'s {{ texts['explanation'] | localised }}:</span>
+                  <app-thesis-text [text]="party.answers[$index].explanation" />
+                </div>
+              </li>
+            }
+          </ol>
+        }
+      </li>
+    }
+  </ol>
+</div>

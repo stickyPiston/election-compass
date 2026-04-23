@@ -1,13 +1,14 @@
 <fieldset class="flex flex-col gap-y-16">
-  <app-thesis-text [text]="thesis().text" />
+  <app-thesis-text class="text-3xl font-semibold" [text]="thesis()" />
 
   <div class="grid grid-cols-5 gap-x-8">
     @let name = 'question-0';
-    @for (answer of answer_possibilities; track $index) {
+    @for (answer of model.answer_possibilities; track $index) {
       @let id = name + '-answer-' + $index;
       <label [for]="id"
         [style.color]="answer.colour"
-        class="relative border-4 rounded-xl flex flex-col gap-2 py-2 hover:bg-neutral-100 has-focus-visible:bg-neutral-100 has-checked:bg-neutral-200"
+        class="relative border-4 rounded-xl flex flex-col gap-2 py-2 hover:bg-neutral-100 has-focus-visible:bg-neutral-100"
+        [class.bg-neutral-200]="form()().value() === answer.answer"
       >
         <input
           tabindex="0"

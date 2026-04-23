@@ -1,0 +1,30 @@
+<div class="w-3/4 mx-auto">
+  <div class="flex flex-nowrap flex-row">
+    <h2 class="font-bold text-2xl my-4 grow">Overzicht van alle stellingen</h2>
+    <a
+      class="border border-neutral-200 bg-[#FFCD00] w-max cursor-pointer rounded-xl my-auto h-8 px-2 py-1"
+      routerLink="/results"
+    >
+      Bekijk resultaten
+      <fa-icon [icon]="faArrowRight" />
+    </a>
+  </div>
+
+  <ol class="flex flex-col gap-y-4">
+    @for (thesis of theses.theses_with_answers; track $index) {
+      <a class="flex flex-row border border-neutral-200 gap-x-4 h-12" [routerLink]="['/', 'theses', $index]">
+        <div class="w-12 h-full bg-[#66718c] grid">
+          <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
+        </div>
+        <span class="my-auto w-full">{{ display_title(thesis.thesis) | localised }}</span>
+        <div class="w-12 h-full bg-[#66718c] grid">
+          @let n = thesis.answer().value();
+          @switch (n) {
+            @case (null) { <fa-icon class="m-auto text-white" [icon]="faMinus" /> }
+            @default { <fa-icon class="m-auto text-white" [icon]="get_answer_possibility(n).icon" /> }
+          }
+        </div>
+      </a>
+    }
+  </ol>
+</div>

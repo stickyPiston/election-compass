@@ -5,6 +5,7 @@ export type LocalisedText = { nl: string, en: string };
 
 @Pipe({
   name: 'localised',
+  pure: false
 })
 export class LocalisedPipe implements PipeTransform {
   localisation = inject(Localisation);

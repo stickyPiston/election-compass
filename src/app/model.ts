@@ -48,6 +48,11 @@ export const answer_possibilities: AnswerPossibility[] = [
 
 export type ExplanationTextPart = { text: LocalisedText, explanation: LocalisedText };
 export type ThesisTextPart = ExplanationTextPart | LocalisedText;
+
+export function is_explanation_part(part: ThesisTextPart): part is ExplanationTextPart {
+  return Object.hasOwn(part, "text");
+}
+
 export type ThesisText = ThesisTextPart[];
 
 export type PartyAnswer = {

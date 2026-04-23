@@ -1,6 +1,6 @@
 import { Component, input } from '@angular/core';
-import * as model from "../model";
-import { LocalisedPipe } from "../localised-pipe";
+import * as model from "../../model";
+import { LocalisedPipe } from "../../localised-pipe";
 
 @Component({
   selector: 'app-thesis-text',

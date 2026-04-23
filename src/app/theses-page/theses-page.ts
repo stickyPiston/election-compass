@@ -1,15 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
 import { form, min } from '@angular/forms/signals';
 import * as model from "../model";
-import { Thesis } from '../thesis/thesis';
+import { Thesis } from './thesis/thesis';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { map, startWith } from 'rxjs';
+import { map } from 'rxjs';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
 import { faXmark, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { NgClass } from '@angular/common';
+import { theses } from "../theses.json";
+import { ThesesService } from '../theses-service';
 
-type View = number | "confirm";
+type View = number;
 
 @Component({
   selector: 'app-theses-page',
@@ -23,25 +25,22 @@ type View = number | "confirm";
 export class ThesesPage {
   router = inject(Router);
   activated_route = inject(ActivatedRoute);
-  current_view = toSignal(this.activated_route.paramMap.pipe(
-    map(m => {
-      const param = m.get("id");
-      return param === "confirm" ? param : Number(param);
-    })
-  ), { requireSync: true });
+  theses_service = inject(ThesesService);
 
-  model = signal<model.FormModel>([null, null]);
-  theses_form = form(this.model, schema_path => {
-    // min(schema_path[0], -2)
-  });
+  current_view = toSignal(
+    this.activated_route.paramMap.pipe(
+      map(param_map => Number(param_map.get("id")!))
+    ),
+    { requireSync: true }
+  );
+
+  model = this.theses_service.form_model;
+  theses_form = this.theses_service.answer_form;
 
   skip_thesis(event: Event) {
-    const view = this.current_view();
-    if (view !== "confirm") {
-      this.theses_form().value.update(answers =>
-        answers.map((answer, index) => index === view ? null : answer));
-      this.next_thesis(event);
-    }
+    this.theses_form().value.update(answers =>
+      answers.map((answer, index) => index === this.current_view() ? null : answer));
+    this.next_thesis(event);
   }
 
   navigate_to(event: Event, id: number) {
@@ -51,38 +50,15 @@ export class ThesesPage {
 
   next_thesis(event: Event) {
     const view = this.current_view();
-    if (view !== "confirm") {
-      if (view + 1 < this.theses.length) {
-        this.navigate_to(event, view + 1);
-      } else {
-        event.preventDefault();
-        this.router.navigate(["theses", "confirm"]);
-      }
+    if (view + 1 < theses.length) {
+      this.navigate_to(event, view + 1);
+    } else {
+      event.preventDefault();
+      this.router.navigate(["overview"]);
     }
   }
 
-  thesis1: model.Thesis = {
-    text: [
-      { nl: "De", en: "The" },
-      {
-        text: { nl: "Haskell Foundation", en: "Haskell Foundation" },
-        explanation: { nl: "Organisatie die Haskell beheert.", en: "Organisation that manages Haskell." }
-      },
-      { nl: "moet afhankelijke types toevoegen aan Haskell.", en: "should add dependent types to Haskell." }
-    ],
-    party_answers: {}
-  };
-  thesis2: model.Thesis = {
-    text: [
-      {
-        nl: "Koffie op de UU moet gratis worden voor alle studenten.",
-        en: "Coffee at UU should be free for all students."
-      }
-    ],
-    party_answers: {}
-  };
-  theses = [this.thesis1, this.thesis2];
-
+  theses = theses;
   faXmark = faXmark;
   faArrowRight = faArrowRight;
 }
