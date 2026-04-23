@@ -21,7 +21,7 @@ jobs:
     - uses: actions/setup-node@v6
 
     - name: Build
-      run: npm ci && npm run build
+      run: npm ci && npm run ci-build
 
     - name: Setup Pages
       uses: actions/configure-pages@v5
