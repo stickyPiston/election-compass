@@ -15,7 +15,7 @@
       (click)="skip_thesis($event)"
       class="border border-neutral-200 group cursor-pointer  hover:bg-neutral-100 w-max px-4 py-2 rounded-xl mx-auto"
     >
-      <span>Stelling overslaan</span>
+      <span>{{ texts['skip'] | localised }}</span>
       <fa-icon class="inline-block transition-all ml-1 group-hover:scale-110" [icon]="faXmark" />
     </button>
 
@@ -36,7 +36,7 @@
       (click)="next_thesis($event)"
       class="border border-neutral-200 group cursor-pointer  not-disabled:hover:bg-neutral-100 w-max px-4 py-2 rounded-xl mx-auto disabled:cursor-not-allowed disabled:bg-neutral-300"
     >
-      <span>Volgende stelling</span>
+      <span>{{ texts['next'] | localised }}</span>
       <fa-icon class="inline-block transition-all ml-1 group-hover:translate-x-1" [icon]="faArrowRight" />
     </button>
   </div>

@@ -1,14 +1,16 @@
 <div class="w-3/4 mx-auto">
   <div class="flex flex-nowrap flex-row">
-    <h2 class="font-bold text-2xl my-4 grow">Overzicht van alle stellingen</h2>
+    <h2 class="font-bold text-2xl my-4 grow">{{ texts['title'] | localised }}</h2>
     <a
       class="border border-neutral-200 bg-[#FFCD00] w-max cursor-pointer rounded-xl my-auto h-8 px-2 py-1"
       routerLink="/results"
     >
-      Bekijk resultaten
+      {{ texts['see_results'] | localised }}
       <fa-icon [icon]="faArrowRight" />
     </a>
   </div>
+
+  <p class="mb-4">{{ texts['subtitle'] | localised }}</p>
 
   <ol class="flex flex-col gap-y-4">
     @for (thesis of theses.theses_with_answers; track $index) {

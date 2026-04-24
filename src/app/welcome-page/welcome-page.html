@@ -1,8 +1,8 @@
 <div class="m-auto w-3/4 text-center flex flex-col gap-y-4">
-  <h1 class="font-bold text-3xl w-full">Welkom bij het kieskompas voor de universiteitsraadsverkiezingen 2025!</h1>
+  <h1 class="font-bold text-3xl w-full">{{ texts['welcome'] | localised }}</h1>
   <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Possimus molestias maiores asperiores esse minima quaerat placeat ducimus iusto qui accusamus earum quidem in minus debitis, accusantium consequatur excepturi corrupti iste?</p>
   <button (click)="open_thesis()" class="group cursor-pointer bg-[#FFCD00] hover:bg-[#e1b400] w-max px-4 py-2 rounded-xl mx-auto">
-    Ga naar de stellingen
+    {{ texts['cta'] | localised }}
     <fa-icon [icon]="faArrowRight" class="inline-block transition-all ml-1 group-hover:translate-x-1" />
   </button>
 </div>

@@ -1,6 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
-import { form, min } from '@angular/forms/signals';
-import * as model from "../model";
+import { Component, inject } from '@angular/core';
 import { Thesis } from './thesis/thesis';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -10,12 +8,11 @@ import { faXmark, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { NgClass } from '@angular/common';
 import { theses } from "../theses.json";
 import { ThesesService } from '../theses-service';
-
-type View = number;
+import { LocalisedPipe, LocalisedText } from '../localised-pipe';
 
 @Component({
   selector: 'app-theses-page',
-  imports: [Thesis, FaIconComponent, NgClass],
+  imports: [Thesis, FaIconComponent, NgClass, LocalisedPipe],
   templateUrl: './theses-page.html',
   styleUrl: './theses-page.css',
   host: {
@@ -56,6 +53,11 @@ export class ThesesPage {
       event.preventDefault();
       this.router.navigate(["overview"]);
     }
+  }
+
+  texts: Record<string, LocalisedText> = {
+    next: { nl: "Volgende stelling", en: "Next thesis" },
+    skip: { nl: "Stelling overslaan", en: "Skip thesis" }
   }
 
   theses = theses;
