@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 
 type Locale = "en" | "nl";
 
@@ -7,4 +7,15 @@ type Locale = "en" | "nl";
 })
 export class Localisation {
   current_language = signal<Locale>("en");
+
+  constructor() {
+    const set_locale = localStorage.getItem("locale") as Locale | null;
+    this.current_language.set(
+      set_locale ?? window.navigator.language.startsWith("nl") ? "nl" : "en"
+    );
+
+    effect(() => {
+      localStorage.setItem("locale", this.current_language());
+    });
+  }
 }
