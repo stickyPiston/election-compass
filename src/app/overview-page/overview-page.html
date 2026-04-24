@@ -14,7 +14,7 @@
 
   <ol class="flex flex-col gap-y-4">
     @for (thesis of theses.theses_with_answers; track $index) {
-      <a class="flex flex-row border border-neutral-200 gap-x-4 flex-nowrap items-stretch" [routerLink]="['/', 'theses', $index]">
+      <a class="flex flex-row border border-neutral-200 gap-x-4 flex-nowrap items-stretch min-h-12" [routerLink]="['/', 'theses', $index]">
         <div class="w-12 bg-[#66718c] grid">
           <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
         </div>

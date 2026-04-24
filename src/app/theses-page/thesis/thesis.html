@@ -1,7 +1,7 @@
 <fieldset class="flex flex-col gap-y-4 md:gap-y-16">
   <app-thesis-text class="text-xl md:text-3xl font-semibold" [text]="thesis()" />
 
-  <div class="grid grid-rows-5 md:grid-cols-5 gap-x-8 gap-y-2">
+  <div class="grid grid-rows-5 md:grid-rows-1 md:grid-cols-5 gap-x-8 gap-y-2">
     @let name = 'question-0';
     @for (answer of model.answer_possibilities; track $index) {
       @let id = name + '-answer-' + $index;
