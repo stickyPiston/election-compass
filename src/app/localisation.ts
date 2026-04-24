@@ -11,7 +11,7 @@ export class Localisation {
   constructor() {
     const set_locale = localStorage.getItem("locale") as Locale | null;
     this.current_language.set(
-      set_locale ?? window.navigator.language.startsWith("nl") ? "nl" : "en"
+      set_locale ?? (window.navigator.language.startsWith("nl") ? "nl" : "en")
     );
 
     effect(() => {
