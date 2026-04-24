@@ -1,77 +1,184 @@
 {
   "theses": [
-    [
-      {
-        "nl": "De ",
-        "en": "The "
-      },
-      {
-        "text": {
-          "nl": "Haskell Foundation",
-          "en": "Haskell Foundation"
-        },
-        "explanation": {
-          "nl": "Organisatie die Haskell beheert.",
-          "en": "Organisation that manages Haskell."
-        }
-      },
-      {
-        "nl": " moet afhankelijke types toevoegen aan Haskell.",
-        "en": " should add dependent types to Haskell."
-      }
-    ],
-    [
-      {
-        "nl": "Koffie op de UU moet gratis worden voor alle studenten.",
-        "en": "Coffee at UU should be free for all students."
-      }
-    ]
+    [{
+      "en": "The university should abolish tuition fees for all students.",
+      "nl": "De universiteit moet het collegegeld voor alle studenten afschaffen."
+    }],
+    [{
+      "en": "Lectures should be mandatory to improve academic performance.",
+      "nl": "Hoorcolleges moeten verplicht worden om de academische prestaties te verbeteren."
+    }],
+    [{
+      "en": "The university should invest more in sustainability initiatives.",
+      "nl": "De universiteit moet meer investeren in duurzaamheidsinitiatieven."
+    }],
+    [{
+      "en": "Exams should be replaced by continuous assessment.",
+      "nl": "Tentamens moeten worden vervangen door continue beoordeling."
+    }],
+    [{
+      "en": "The university should increase collaboration with private companies.",
+      "nl": "De universiteit moet de samenwerking met private bedrijven vergroten."
+    }]
   ],
   "parties": [
     {
-      "name": "Lynn voor UU",
-      "answers": [
-        { "answer": -2, "explanation": [] },
-        { "answer": -1, "explanation": [] }
-      ]
-    },
-    {
-      "name": "R.O.B.I.N.",
+      "name": "Student Progress Alliance",
       "answers": [
         {
+          "answer": 2,
+          "explanation": [{
+            "en": "Education should be accessible to everyone regardless of financial background.",
+            "nl": "Onderwijs moet voor iedereen toegankelijk zijn, ongeacht financiële achtergrond."
+          }]
+        },
+        {
           "answer": -2,
-          "explanation": [
-            {
-              "nl": "Afhankelijke types zijn moeilijker te inferreren en dat gaat volgens ons tegen de essentie van Haskell in. Bovendien zijn er nog geen praktische manieren ontwikkeld om talen met afhankelijke types te compileren, wat de redelijk goede runtime van Haksell benadeelt.",
-              "en": "Dependent types are harder to infer and that conflicts with the essence of Haskell according to us. Additionally, there are no practical ways to compile languages with dependent types which is detrimental to Haskell's relatively good runtime performance."
-            }
-          ]
+          "explanation": [{
+            "en": "Students should have the freedom to choose how they engage with course material.",
+            "nl": "Studenten moeten de vrijheid hebben om zelf te kiezen hoe ze met studiemateriaal omgaan."
+          }]
         },
         {
           "answer": 2,
-          "explanation": [
-            {
-              "nl": "Koffie is een belangrijke drank om studenten en medewerkers efficient te kunnen laten werken. Wij vinden dat de UU dit moet promoten, door koffie te verschaffen op haar kosten.",
-              "en": "Coffee is an important drink to keep students and employees efficient at their work. We believe that the UU should promote this by providing coffee on their cost."
-            }
-          ]
+          "explanation": [{
+            "en": "Sustainability is a core responsibility of modern universities.",
+            "nl": "Duurzaamheid is een kernverantwoordelijkheid van moderne universiteiten."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Continuous assessment better reflects student progress over time.",
+            "nl": "Continue beoordeling geeft een beter beeld van de voortgang van studenten."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Too much private influence may compromise academic independence.",
+            "nl": "Te veel private invloed kan de academische onafhankelijkheid aantasten."
+          }]
         }
       ]
     },
     {
-      "name": "Partij Terra",
+      "name": "Academic Excellence Party",
       "answers": [
         {
-          "answer": 2,
-          "explanation": [
-            { "nl": "Afhankelijk types net", "en": "Dependent types neat" }
-          ]
+          "answer": -2,
+          "explanation": [{
+            "en": "Tuition fees are necessary to maintain high-quality education and facilities.",
+            "nl": "Collegegeld is nodig om hoogwaardig onderwijs en faciliteiten te behouden."
+          }]
         },
         {
           "answer": 2,
-          "explanation": [
-            { "nl": "Heb koffie nodig voor programmeren", "en": "Need coffee for programming" }
-          ]
+          "explanation": [{
+            "en": "Mandatory lectures ensure students stay engaged and disciplined.",
+            "nl": "Verplichte hoorcolleges zorgen ervoor dat studenten betrokken en gedisciplineerd blijven."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Investing in sustainability enhances the university’s long-term reputation.",
+            "nl": "Investeren in duurzaamheid versterkt de langetermijnreputatie van de universiteit."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Exams provide a clear and standardized way to measure knowledge.",
+            "nl": "Tentamens bieden een duidelijke en gestandaardiseerde manier om kennis te meten."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Collaboration with companies creates opportunities for research and careers.",
+            "nl": "Samenwerking met bedrijven creëert kansen voor onderzoek en carrières."
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Green Campus Coalition",
+      "answers": [
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Removing tuition fees promotes equality and reduces economic barriers.",
+            "nl": "Het afschaffen van collegegeld bevordert gelijkheid en vermindert economische barrières."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Flexibility in learning is important for student well-being.",
+            "nl": "Flexibiliteit in leren is belangrijk voor het welzijn van studenten."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Sustainability should be a top priority in all university policies.",
+            "nl": "Duurzaamheid moet een topprioriteit zijn in al het universiteitsbeleid."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Continuous assessment reduces stress and encourages consistent effort.",
+            "nl": "Continue beoordeling vermindert stress en stimuleert consistente inzet."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Private partnerships may conflict with environmental and ethical goals.",
+            "nl": "Private samenwerkingen kunnen botsen met milieu- en ethische doelstellingen."
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Innovation and Enterprise Group",
+      "answers": [
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Tuition fees help fund innovation and cutting-edge programs.",
+            "nl": "Collegegeld helpt innovatie en vooruitstrevende programma’s te financieren."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Structured attendance improves outcomes and accountability.",
+            "nl": "Gestructureerde aanwezigheid verbetert resultaten en verantwoordelijkheid."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Sustainability investments can drive innovation and attract funding.",
+            "nl": "Investeringen in duurzaamheid kunnen innovatie stimuleren en financiering aantrekken."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Exams are efficient and scalable for evaluating large student groups.",
+            "nl": "Tentamens zijn efficiënt en schaalbaar voor het beoordelen van grote groepen studenten."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Strong ties with industry prepare students for the job market.",
+            "nl": "Sterke banden met het bedrijfsleven bereiden studenten voor op de arbeidsmarkt."
+          }]
         }
       ]
     }
