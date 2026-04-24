@@ -1,6 +1,6 @@
-<div class="w-3/4 mx-auto">
-  <div class="flex flex-nowrap flex-row">
-    <h2 class="font-bold text-2xl my-4 grow">{{ texts['title'] | localised }}</h2>
+<div class="w-3/4 mx-auto pb-4">
+  <div class="flex flex-nowrap flex-col gap-y-2 md:flex-row my-4">
+    <h2 class="font-bold text-2xl grow">{{ texts['title'] | localised }}</h2>
     <a
       class="border border-neutral-200 bg-[#FFCD00] w-max cursor-pointer rounded-xl my-auto h-8 px-2 py-1"
       routerLink="/results"
@@ -14,12 +14,12 @@
 
   <ol class="flex flex-col gap-y-4">
     @for (thesis of theses.theses_with_answers; track $index) {
-      <a class="flex flex-row border border-neutral-200 gap-x-4 h-12" [routerLink]="['/', 'theses', $index]">
-        <div class="w-12 h-full bg-[#66718c] grid">
+      <a class="flex flex-row border border-neutral-200 gap-x-4 flex-nowrap items-stretch" [routerLink]="['/', 'theses', $index]">
+        <div class="w-12 bg-[#66718c] grid">
           <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
         </div>
         <span class="my-auto w-full">{{ display_title(thesis.thesis) | localised }}</span>
-        <div class="w-12 h-full bg-[#66718c] grid">
+        <div class="w-12 bg-[#66718c] grid">
           @let n = thesis.answer().value();
           @switch (n) {
             @case (null) { <fa-icon class="m-auto text-white" [icon]="faMinus" /> }

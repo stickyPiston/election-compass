@@ -1,4 +1,4 @@
-<div class="w-3/4 mx-auto mb-4">
+<div class="w-7/8 md:w-3/4 mx-auto mb-4">
   <div class="flex flex-col my-4">
     <h2 class="font-bold text-2xl">{{ texts['results'] | localised }}</h2>
     <p>
@@ -12,14 +12,14 @@
   <ol class="flex flex-col gap-y-4">
     @for (party of sorted_parties(); track $index) {
       <li>
-        <div class="flex flex-row border border-neutral-200 gap-x-4 h-12">
-          <div class="w-12 h-full bg-[#66718c] grid">
+        <div class="flex flex-row border border-neutral-200 gap-x-4 items-stretch">
+          <div class="w-12 bg-[#66718c] grid">
             <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
           </div>
           <span class="my-auto w-full">
             {{ party.name }} ({{ percentage(party.similarity) }}% {{ texts['match'] | localised }})
           </span>
-          <span class="w-12 h-full bg-[#66718c] grid cursor-pointer" (click)="toggle_explanation($index)">
+          <span class="w-12 bg-[#66718c] grid cursor-pointer" (click)="toggle_explanation($index)">
             <fa-icon class="m-auto text-white" [icon]="opened()[$index] ? faChevronUp : faChevronDown" />
           </span>
         </div>
@@ -30,11 +30,14 @@
                 @let own_answer = theses_service.own_answers()[$index]!;
                 @let party_answer = party.answers[$index].answer;
                 @let icon = similarity_icon(own_answer, party_answer);
-                <fa-icon [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                <fa-icon class="hidden md:block" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
                 <div class="w-full flex flex-col gap-y-2">
-                  <app-thesis-text [text]="thesis" />
+                  <div class="flex flex-row gap-x-2">
+                    <fa-icon class="md:hidden block m-auto" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                    <app-thesis-text [text]="thesis" />
+                  </div>
                   <hr class="border-neutral-200">
-                  <div class="grid grid-cols-2">
+                  <div class="grid grid-cols-2 gap-x-2">
                     <div>
                       <span class="text-neutral-600">{{ texts['your_answer'] | localised }}: </span>
                       <span>{{ answer_text(own_answer) | localised }}</span>
