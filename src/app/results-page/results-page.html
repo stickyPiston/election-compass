@@ -27,10 +27,15 @@
           <ol class="border-l border-r border-b border-neutral-200 flex flex-col gap-y-4 py-4">
             @for (thesis of theses; track $index) {
               <li class="bg-neutral-100 mx-4 border border-neutral-300 px-4 py-4 flex flex-row gap-x-4">
-                @let own_answer = theses_service.own_answers()[$index].answer!;
+                @let own_answer = theses_service.own_answers()[$index];
                 @let party_answer = party.answers[$index].answer;
-                @let icon = similarity_icon(own_answer, party_answer);
-                <fa-icon class="hidden md:block" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                @let icon = similarity_icon(own_answer.answer!, party_answer);
+                <div class="hidden md:flex flex-row w-6 justify-between mx-auto" [class.-translate-x-2]="own_answer.important">
+                  @if (own_answer.important) {
+                    <fa-icon [icon]="faExclamation" class="text-yellow-500 w-2" />
+                  }
+                  <fa-icon [class.w-2]="own_answer.important" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                </div>
                 <div class="w-full flex flex-col gap-y-2">
                   <div class="flex flex-row gap-x-2">
                     <fa-icon class="md:hidden block m-auto" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
@@ -40,7 +45,7 @@
                   <div class="grid grid-cols-2 gap-x-2">
                     <div>
                       <span class="text-neutral-600">{{ texts['your_answer'] | localised }}: </span>
-                      <span>{{ answer_text(own_answer) | localised }}</span>
+                      <span>{{ answer_text(own_answer.answer!) | localised }}</span>
                     </div>
                     <div>
                       <span class="text-neutral-600">{{ party.name }}'s {{ texts['answer'] | localised }}: </span>

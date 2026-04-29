@@ -4,7 +4,7 @@ import _ from "lodash";
 import { ThesesService } from '../theses-service';
 import { parties, theses } from "../theses.json";
 import { ThesisText as ThesisTextComponent } from '../theses-page/thesis-text/thesis-text';
-import { faCheckCircle, faChevronDown, faChevronUp, faMinus, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
+import { faCheckCircle, faChevronDown, faChevronUp, faExclamation, faMinus, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LocalisedPipe, LocalisedText } from '../localised-pipe';
 import { NgClass } from "@angular/common";
@@ -100,5 +100,6 @@ export class ResultsPage {
   theses = theses;
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
+  faExclamation = faExclamation;
   faMinus = faMinus;
 }
