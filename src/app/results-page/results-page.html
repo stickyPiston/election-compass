@@ -27,7 +27,7 @@
           <ol class="border-l border-r border-b border-neutral-200 flex flex-col gap-y-4 py-4">
             @for (thesis of theses; track $index) {
               <li class="bg-neutral-100 mx-4 border border-neutral-300 px-4 py-4 flex flex-row gap-x-4">
-                @let own_answer = theses_service.own_answers()[$index]!;
+                @let own_answer = theses_service.own_answers()[$index].answer!;
                 @let party_answer = party.answers[$index].answer;
                 @let icon = similarity_icon(own_answer, party_answer);
                 <fa-icon class="hidden md:block" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />

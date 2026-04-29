@@ -1,5 +1,5 @@
 import { computed, effect, Injectable, resource, signal } from '@angular/core';
-import { Answer, Thesis, ThesisText } from './model';
+import { Answer, Thesis, ThesisAnswer, ThesisText } from './model';
 import { FieldTree, form } from '@angular/forms/signals';
 import { theses } from "./theses.json";
 
@@ -7,8 +7,8 @@ import { theses } from "./theses.json";
   providedIn: 'root',
 })
 export class ThesesService {
-  form_model = signal<Answer[]>(theses.map(_ => 2));
-  answer_form: FieldTree<Answer[]> = form(this.form_model);
+  form_model = signal<ThesisAnswer[]>(theses.map(_ => ({ answer: null, important: false })));
+  answer_form: FieldTree<ThesisAnswer[]> = form(this.form_model);
 
   own_answers = computed(() => this.answer_form().value());
 
@@ -23,14 +23,7 @@ export class ThesesService {
     });
   }
 
-  theses_with_answers: { thesis: ThesisText, answer: FieldTree<Answer> }[] = theses.map((thesis, idx) => ({
+  theses_with_answers: { thesis: ThesisText, answer: FieldTree<ThesisAnswer> }[] = theses.map((thesis, idx) => ({
     thesis, answer: this.answer_form[idx]
   }));
-
-  update_answer(idx: number, answer: Answer) {
-    if (idx >= theses.length)
-      throw new Error("Invalid thesis index");
-
-    this.answer_form[idx]().value.set(answer);
-  }
 }

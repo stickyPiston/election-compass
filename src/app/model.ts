@@ -65,5 +65,5 @@ export type Thesis = {
   party_answers: Record<Party, PartyAnswer>;
 };
 
-export type ThesisAnswer = number | null;
+export type ThesisAnswer = { answer: number | null, important: boolean };
 export type FormModel = ThesisAnswer[];

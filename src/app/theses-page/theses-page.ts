@@ -14,9 +14,6 @@ import { LocalisedPipe, LocalisedText } from '../localised-pipe';
   imports: [Thesis, FaIconComponent, LocalisedPipe],
   templateUrl: './theses-page.html',
   styleUrl: './theses-page.css',
-  host: {
-    class: 'h-[calc(100vh-6.5rem)]'
-  }
 })
 export class ThesesPage {
   router = inject(Router);
@@ -35,7 +32,7 @@ export class ThesesPage {
 
   skip_thesis(event: Event) {
     this.theses_form().value.update(answers =>
-      answers.map((answer, index) => index === this.current_view() ? null : answer));
+      answers.map((answer, index) => index === this.current_view() ? { ...answer, answer: null } : answer));
     this.next_thesis(event);
   }
 

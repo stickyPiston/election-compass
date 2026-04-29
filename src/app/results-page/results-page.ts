@@ -24,17 +24,18 @@ export class ResultsPage {
 
   answered_count = computed(() => this.theses_service.own_answers().filter(ans => ans !== null).length);
 
-  similarity(own_answers: Answer[], party_answers: (-2 | -1 | 1 | 2)[]) {
+  similarity(weights: (1 | 2)[], own_answers: Answer[], party_answers: (-2 | -1 | 1 | 2)[]) {
     // Filter out dimensions which haven't been answered
-    const vectors = _.chain(own_answers)
-      .zip(party_answers)
-      .filter(([a, _b]) => a !== null)
-      .value() as [(-2 | -1 | 0 | 1 | 2), (-2 | -1 | 1 | 2)][];
+    const vectors = _.chain(weights as (number | null)[])
+      .zip(own_answers, party_answers)
+      .filter(([_w, a, _b]) => a !== null)
+      .value() as [number, number, number][];
 
-    const dot = _.sumBy(vectors, ([a, b]) => a * b);
-    const [reduced_own_answers, reduced_party_answers] = _.unzip(vectors);
-    const denom = Math.sqrt(_.sumBy(reduced_own_answers, a => a * a))
-      * Math.sqrt(_.sumBy(reduced_party_answers, a => a * a));
+    const dot = _.sumBy(vectors, ([w, a, b]) => w * a * b);
+    const [reduced_weights, reduced_own_answers, reduced_party_answers] = _.unzip(vectors);
+    const denom =
+      Math.sqrt(_.sum(_.zipWith(reduced_weights, reduced_own_answers, (w, a) => w * a * a)))
+      * Math.sqrt(_.sum(_.zipWith(reduced_weights, reduced_party_answers, (w, a) => w * a * a)));
 
     return dot / denom;
   }
@@ -49,7 +50,9 @@ export class ResultsPage {
     return _.chain(parties)
       .map(party => {
         const answer_scores = party.answers.map(ans => ans.answer) as (-2 | -1 | 1 | 2)[];
-        return { ...party, similarity: this.similarity(own_answers, answer_scores) };
+        const own_scores = own_answers.map(answer => answer.answer) as Answer[];
+        const weights = own_answers.map(answer => answer.important ? 2 : 1);
+        return { ...party, similarity: this.similarity(weights, own_scores, answer_scores) };
       })
       .sortBy("similarity")
       .reverse()
@@ -88,9 +91,9 @@ export class ResultsPage {
     explanation: { nl: "uitleg", en: "explanation" },
     similarity_link: { nl: "https://nl.wikipedia.org/wiki/Cosinusgelijkenis", en: "https://en.wikipedia.org/wiki/Cosine_similarity" },
     cosine_similarity: { nl: "cosinusgelijkenis", en: "cosine similarity" },
-    subtitle_1: { nl: "De overeenkomst van jouw antwoorden met de antwoorden van de partijen is berekend op basis van ", en: "The matching percentage of your answers and the parties' answers is calculated by use of the " },
+    subtitle_1: { nl: "De overeenkomst van jouw antwoorden met de antwoorden van de partijen is berekend op basis van gewogen ", en: "The matching percentage of your answers and the parties' answers is calculated by use of weighted " },
     subtitle_2: { nl: " op de ", en: " on the " },
-    subtitle_3: { nl: " betantwoorde stellingen. Overgeslagen stellingen worden niet meegenomen in de berekening en kunnen daardoor de resultaten minder accuraat maken.", en: " answered theses. Skipped theses are not used in the calculation and can therefore make the results less accurate." }
+    subtitle_3: { nl: " beantwoorde stellingen. Overgeslagen stellingen worden niet meegenomen in de berekening en kunnen daardoor de resultaten minder accuraat maken.", en: " answered theses. Skipped theses are not used in the calculation and can therefore make the results less accurate." }
   }
 
   parties = parties;

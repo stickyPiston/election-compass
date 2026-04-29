@@ -1,4 +1,4 @@
-<form class="flex flex-col justify-between h-full w-3/4 m-auto pb-4">
+<form class="flex flex-col justify-between gap-y-2 w-3/4 m-auto pb-4 min-h-[calc(100vh-6.5rem)]">
   <p class="mx-auto text-gray-400">{{ texts['thesis'] | localised }} {{ current_view() + 1 }} {{ texts['out_of'] | localised }} {{ theses.length }}</p>
 
   @for (thesis of theses; track $index) {
@@ -30,7 +30,7 @@
     </button>
 
     <button
-      [disabled]="theses_form[view]().value() === null"
+      [disabled]="theses_form[view]().value().answer === null"
       (click)="next_thesis($event)"
       class="border border-neutral-200 group cursor-pointer not-disabled:hover:bg-neutral-100 w-max px-4 py-2 rounded-xl mx-auto disabled:cursor-not-allowed disabled:bg-neutral-300"
     >

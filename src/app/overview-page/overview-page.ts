@@ -20,7 +20,7 @@ export class OverviewPage {
     return { nl: texts.reduce((ac, text) => ac + text.nl, ""), en: texts.reduce((ac, text) => ac + text.en, "") }
   }
 
-  get_answer_possibility(answer: Answer) {
+  get_answer_possibility(answer: number | null) {
     return answer_possibilities.find(poss => poss.answer === answer)!;
   }
 
