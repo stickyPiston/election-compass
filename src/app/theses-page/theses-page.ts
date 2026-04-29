@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faXmark, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { faXmark, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { NgClass } from '@angular/common';
 import { theses } from "../theses.json";
 import { ThesesService } from '../theses-service';
@@ -55,12 +55,19 @@ export class ThesesPage {
     }
   }
 
+  prev_thesis(event: Event) {
+    const view = this.current_view();
+    this.navigate_to(event, Math.max(0, view - 1));
+  }
+
   texts: Record<string, LocalisedText> = {
-    next: { nl: "Volgende stelling", en: "Next thesis" },
-    skip: { nl: "Stelling overslaan", en: "Skip thesis" }
+    next: { nl: "Volgende", en: "Next" },
+    skip: { nl: "Stelling overslaan", en: "Skip thesis" },
+    prev: { nl: "Vorige", en: "Back" }
   }
 
   theses = theses;
   faXmark = faXmark;
   faArrowRight = faArrowRight;
+  faArrowLeft = faArrowLeft;
 }
