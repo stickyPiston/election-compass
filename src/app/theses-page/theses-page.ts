@@ -4,15 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { faXmark, faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import { NgClass } from '@angular/common';
+import { faXmark, faArrowRight, faArrowLeft, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { theses } from "../theses.json";
 import { ThesesService } from '../theses-service';
 import { LocalisedPipe, LocalisedText } from '../localised-pipe';
 
 @Component({
   selector: 'app-theses-page',
-  imports: [Thesis, FaIconComponent, NgClass, LocalisedPipe],
+  imports: [Thesis, FaIconComponent, LocalisedPipe],
   templateUrl: './theses-page.html',
   styleUrl: './theses-page.css',
   host: {
@@ -63,11 +62,15 @@ export class ThesesPage {
   texts: Record<string, LocalisedText> = {
     next: { nl: "Volgende", en: "Next" },
     skip: { nl: "Stelling overslaan", en: "Skip thesis" },
-    prev: { nl: "Vorige", en: "Back" }
+    prev: { nl: "Vorige", en: "Back" },
+    thesis: { nl: "Stelling", en: "Thesis" },
+    out_of: { nl: "van de", en: "out of" },
+    complete: { nl: "Resultaten", en: "Results" }
   }
 
   theses = theses;
   faXmark = faXmark;
   faArrowRight = faArrowRight;
   faArrowLeft = faArrowLeft;
+  faCheck = faCheck;
 }

@@ -17,6 +17,6 @@ export class App {
   }
 
   texts: Record<string, LocalisedText> = {
-    title: { nl: "Kieskompas universiteitsraadverkiezingen 26/27", en: "Election compass university council 26/27" }
+    title: { nl: "Kieskompas Universiteitsraadsverkiezingen 26/27", en: "Election Compass University Council 26/27" }
   };
 }
