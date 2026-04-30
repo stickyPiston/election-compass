@@ -47,7 +47,8 @@ export class ThesesPage {
       this.navigate_to(event, view + 1);
     } else {
       event.preventDefault();
-      this.router.navigate(["overview"]);
+      const everything_answered = !this.theses_form().value().some(ans => ans === null);
+      this.router.navigate(everything_answered ? ["results"] : ["overview"]);
     }
   }
 

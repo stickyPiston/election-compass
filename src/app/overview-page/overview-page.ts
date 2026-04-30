@@ -26,8 +26,8 @@ export class OverviewPage {
 
   texts: Record<string, LocalisedText> = {
     see_results: { nl: "Bekijk resultaten", en: "View results" },
-    title: { nl: "Overzicht van alle stellingen", en: "Overview of all theses" },
-    subtitle: { nl: "Hier is een overzicht van alle stellingen en de antwoorden die je hebt gegeven. Controleer of je alle stellingen hebt beantwoord, en zoniet klik op een stelling in de lijst om alsnog een antwoord te kunnen geven.", en: "Here is an overview of all theses and your answers to them. Check whether you have answered all of the these, and if not, click a thesis to quickly answer it still." }
+    title: { nl: "Controleer of je alles ingevuld hebt", en: "Check that you answered everything" },
+    subtitle: { nl: "Hier is een overzicht van alle stellingen en de antwoorden die je hebt gegeven. Controleer of je alle stellingen hebt goed hebt beantwoord, en zoniet klik op een stelling in de lijst om alsnog een antwoord te kunnen geven.", en: "Here is an overview of all theses and your answers to them. Check whether you have answered all of the theses correctly, and if not, click a thesis to quickly answer it still." }
   }
 
   faMinus = faMinus;

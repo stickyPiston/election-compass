@@ -1,4 +1,4 @@
-import { computed, effect, Injectable, resource, signal } from '@angular/core';
+import { computed, effect, Injectable, resource, Signal, signal } from '@angular/core';
 import { Answer, Thesis, ThesisAnswer, ThesisText } from './model';
 import { FieldTree, form } from '@angular/forms/signals';
 import { theses } from "./theses.json";
@@ -23,7 +23,7 @@ export class ThesesService {
     });
   }
 
-  theses_with_answers: { thesis: ThesisText, answer: FieldTree<ThesisAnswer> }[] = theses.map((thesis, idx) => ({
-    thesis, answer: this.answer_form[idx]
-  }));
+  theses_with_answers = computed(() =>
+    theses.map((thesis, idx) => ({ thesis, answer: this.answer_form[idx]().value() }))
+  );
 }
