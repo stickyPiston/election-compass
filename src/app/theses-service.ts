@@ -1,5 +1,5 @@
-import { computed, effect, Injectable, resource, Signal, signal } from '@angular/core';
-import { Answer, Thesis, ThesisAnswer, ThesisText } from './model';
+import { computed, Injectable, signal } from '@angular/core';
+import { ThesisAnswer } from './model';
 import { FieldTree, form } from '@angular/forms/signals';
 import { theses } from "./theses.json";
 
@@ -11,17 +11,6 @@ export class ThesesService {
   answer_form: FieldTree<ThesisAnswer[]> = form(this.form_model);
 
   own_answers = computed(() => this.answer_form().value());
-
-  constructor() {
-    const answers = localStorage.getItem("answers");
-    if (answers) {
-      this.answer_form().value.set(JSON.parse(answers));
-    }
-
-    effect(() => {
-      localStorage.setItem("answers", JSON.stringify(this.form_model()));
-    });
-  }
 
   theses_with_answers = computed(() =>
     theses.map((thesis, idx) => ({ thesis, answer: this.answer_form[idx]().value() }))
