@@ -14,7 +14,7 @@ export class LocalisedPipe implements PipeTransform {
     return Object.hasOwn(value, "en") && Object.hasOwn(value, "nl");
   }
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: unknown, ...args: unknown[]): string {
     if (this.is_localised(value)) {
       return value[this.localisation.current_language()];
     } else {
