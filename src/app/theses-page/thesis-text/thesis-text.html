@@ -3,7 +3,7 @@
     @if (is_decorated(part)) {
       <span tabindex="0" class="relative overflow-visible group underline decoration-dashed cursor-help">
         {{ part.text | localised }}
-        <div class="text-base absolute top-10 left-0 group-hover:block group-focus:block hidden bg-[#fff8e6] px-4 py-2 w-max max-w-prose">
+        <div class="text-base font-normal absolute top-10 left-0 group-hover:block group-focus:block hidden bg-[#fff8e6] px-4 py-2 w-max max-w-prose">
           {{ part.explanation | localised }}
         </div>
       </span>

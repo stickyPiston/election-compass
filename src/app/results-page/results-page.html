@@ -13,17 +13,22 @@
     @for (party of sorted_parties(); track $index) {
       @let is_winner = percentage(party.similarity) === percentage(highest_similarity());
       <li>
-        <div class="flex flex-row border border-neutral-200 gap-x-4 items-stretch min-h-12">
+        <div class="flex flex-row border border-neutral-200 items-stretch min-h-12">
           <div class="w-12 bg-[#66718c] grid">
             <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
           </div>
           <div class="my-auto w-full flex flex-row justify-between gap-x-1">
-            <div>
-              <h3 [class.font-bold]="is_winner">{{ party.name }}</h3>
-              <span class="text-gray-600">{{ percentage(party.similarity) }}% {{ texts['match'] | localised }}</span>
+            <div class="flex flex-row gap-x-2">
+              <div class="h-full w-12 relative">
+                <img class="object-cover h-full w-full" [ngSrc]="party.logo" [alt]="'Logo ' + party.name" fill>
+              </div>
+              <div class="flex flex-col">
+                <h3 [class.font-bold]="is_winner">{{ party.name }}</h3>
+                <span [ngClass]="{'text-gray-600': !is_winner, 'text-green-600': is_winner }">{{ percentage(party.similarity) }}% {{ texts['match'] | localised }}</span>
+              </div>
             </div>
             @if (is_winner) {
-              <fa-icon class="text-yellow-300 my-auto text-2xl" [icon]="faTrophy" />
+              <fa-icon class="text-yellow-300 my-auto text-2xl mr-2" [icon]="faTrophy" />
               <span class="sr-only">{{ texts['best_match'] | localised }}</span>
             }
           </div>
@@ -32,46 +37,67 @@
           </span>
         </div>
         @if (opened()[$index]) {
-          <ol class="border-l border-r border-b border-neutral-200 flex flex-col gap-y-4 py-4">
-            @for (thesis of theses; track $index) {
-              <li class="bg-neutral-100 mx-4 border border-neutral-300 px-4 py-4 flex flex-row gap-x-4">
-                @let own_answer = theses_service.own_answers()[$index];
-                @let party_answer = party.answers[$index].answer;
-                @let icon = similarity_icon(own_answer.answer!, party_answer);
-                <div class="hidden md:flex flex-row w-6 justify-between mx-auto" [class.-translate-x-2]="own_answer.important">
-                  @if (own_answer.important) {
-                    <fa-icon [icon]="faExclamation" class="text-yellow-500 w-2" />
-                  }
-                  <fa-icon [class.w-2]="own_answer.important" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
-                </div>
-                <div class="w-full flex flex-col gap-y-2">
-                  <div class="flex flex-row gap-x-2">
-                    <div class="md:hidden flex m-auto flex-row w-6 justify-between" [class.-translate-x-2]="own_answer.important">
-                      @if (own_answer.important) {
-                        <fa-icon [icon]="faExclamation" class="text-yellow-500 w-2 -translate-x-2" />
-                      }
-                      <fa-icon [class.w-2]="own_answer.important" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
-                    </div>
-                    <app-thesis-text [text]="thesis" />
-                  </div>
-                  <hr class="border-neutral-200">
-                  <div class="grid grid-cols-2 gap-x-2">
-                    <div>
-                      <span class="text-neutral-600">{{ texts['your_answer'] | localised }}: </span>
-                      <span>{{ answer_text(own_answer.answer!) | localised }}</span>
-                    </div>
-                    <div>
-                      <span class="text-neutral-600">{{ party.name }}'s {{ texts['answer'] | localised }}: </span>
-                      <span>{{ answer_text(party_answer) | localised }}</span>
-                    </div>
-                  </div>
-                  <hr class="border-neutral-200">
-                  <span class="text-neutral-600">{{ party.name }}'s {{ texts['explanation'] | localised }}:</span>
-                  <app-thesis-text [text]="party.answers[$index].explanation" />
-                </div>
-              </li>
+          <div class="border-l border-r border-b border-neutral-200 px-4">
+            @if (party.about || party.buttons) {
+              <section class="py-4">
+                @if (party.about) {
+                  <p>{{ party.about | localised }}</p>
+                }
+                @if (party.buttons) {
+                  <ul class="flex flex-row gap-4 flex-wrap mt-4">
+                    @for (button of party.buttons; track $index) {
+                      <li>
+                        <a class="bg-[#ffcd00] px-4 py-2 rounded" [href]="button.link">{{ button.name | localised }}</a>
+                      </li>
+                    }
+                  </ul>
+                }
+              </section>
+              <hr class="border-neutral-200">
             }
-          </ol>
+
+            <h4 class="mt-4 font-semibold">{{ party.name }}'s {{ texts['answers'] | localised }}:</h4>
+            <ol class="flex flex-col gap-y-4 py-4">
+              @for (thesis of theses; track $index) {
+                <li class="bg-neutral-100 border border-neutral-300 px-4 py-4 flex flex-row gap-x-4">
+                  @let own_answer = theses_service.own_answers()[$index];
+                  @let party_answer = party.answers[$index].answer;
+                  @let icon = similarity_icon(own_answer.answer!, party_answer);
+                  <div class="hidden md:flex flex-row w-6 justify-between mx-auto" [class.-translate-x-2]="own_answer.important">
+                    @if (own_answer.important) {
+                      <fa-icon [icon]="faExclamation" class="text-yellow-500 w-2" />
+                    }
+                    <fa-icon [class.w-2]="own_answer.important" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                  </div>
+                  <div class="w-full flex flex-col gap-y-2">
+                    <div class="flex flex-row gap-x-2">
+                      <div class="md:hidden flex m-auto flex-row w-6 justify-between" [class.-translate-x-2]="own_answer.important">
+                        @if (own_answer.important) {
+                          <fa-icon [icon]="faExclamation" class="text-yellow-500 w-2 -translate-x-2" />
+                        }
+                        <fa-icon [class.w-2]="own_answer.important" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
+                      </div>
+                      <app-thesis-text [text]="thesis" />
+                    </div>
+                    <hr class="border-neutral-200">
+                    <div class="grid grid-cols-2 gap-x-2">
+                      <div>
+                        <span class="text-neutral-600">{{ texts['your_answer'] | localised }}: </span>
+                        <span>{{ answer_text(own_answer.answer!) | localised }}</span>
+                      </div>
+                      <div>
+                        <span class="text-neutral-600">{{ party.name }}'s {{ texts['answer'] | localised }}: </span>
+                        <span>{{ answer_text(party_answer) | localised }}</span>
+                      </div>
+                    </div>
+                    <hr class="border-neutral-200">
+                    <span class="text-neutral-600">{{ party.name }}'s {{ texts['explanation'] | localised }}:</span>
+                    <app-thesis-text [text]="party.answers[$index].explanation" />
+                  </div>
+                </li>
+              }
+            </ol>
+          </div>
         }
       </li>
     }

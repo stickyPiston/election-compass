@@ -67,3 +67,16 @@ export type Thesis = {
 
 export type ThesisAnswer = { answer: number | null, important: boolean };
 export type FormModel = ThesisAnswer[];
+
+export type PartyData = {
+  name: string;
+  logo: string;
+  answers: { answer: (-2 | 2), explanation: LocalisedText[] }[];
+  about?: string;
+  buttons?: { name: LocalisedText, link: string }[];
+};
+
+export type ThesesData = {
+  parties: PartyData[];
+  theses: ThesisTextPart[][];
+}

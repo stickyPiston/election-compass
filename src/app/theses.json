@@ -1,8 +1,17 @@
 {
   "theses": [
     [{
-      "en": "The university should abolish tuition fees for all students.",
-      "nl": "De universiteit moet het collegegeld voor alle studenten afschaffen."
+      "en": "The university should abolish ",
+      "nl": "De universiteit moet het "
+    }, {
+      "text": { "en": "tuition fees", "nl": "collegegeld" },
+      "explanation": {
+        "en": "The money students pay to attend the university.",
+        "nl": "Het geld dat studenten betalen om aan de universiteit te studeren."
+      }
+    }, {
+      "en": " for all students.",
+      "nl": " voor alle studenten afschaffen."
     }],
     [{
       "en": "Lectures should be mandatory to improve academic performance.",
@@ -23,7 +32,8 @@
   ],
   "parties": [
     {
-      "name": "Student Progress Alliance",
+      "name": "Lijst VUUR",
+      "logo": "vuur.png",
       "answers": [
         {
           "answer": 2,
@@ -63,7 +73,8 @@
       ]
     },
     {
-      "name": "Academic Excellence Party",
+      "name": "Vrijmoedige Studentenpartij",
+      "logo": "vsp.jpg",
       "answers": [
         {
           "answer": -2,
@@ -103,7 +114,16 @@
       ]
     },
     {
-      "name": "Green Campus Coalition",
+      "name": "RUPS",
+      "logo": "rups.png",
+      "about": {
+        "en": "We at RUPS (Righteous Utrecht Party for Students) want to make life as good as possible for as many students as possible. We do this through concrete plans that tackle challenges directly. As a new party, we address issues that were previously ignored. Why? Because this time calls for pragmatic leadership and change.",
+        "nl": "Wij van RUPS (Rechtvaardige Utrechtse Partij voor Studenten) willen de problemen aanpakken waar studenten in het dagelijks leven mee zitten. Dit doen we via concrete plannen, die uitdagingen pragmatisch benaderen. We snijden als nieuwe partij onderwerpen aan die voorheen genegeerd bleven. RUPS behaalde in 2025 één zetel in de U-raad."
+      },
+      "buttons": [
+        { "name": { "nl": "Website", "en": "Website" }, "link": "https://stemrups.nl" },
+        { "name": { "nl": "Instagram", "en": "Instagram" }, "link": "https://instagram.com/rups_uu" }
+      ],
       "answers": [
         {
           "answer": 2,
@@ -143,7 +163,90 @@
       ]
     },
     {
-      "name": "Innovation and Enterprise Group",
+      "name": "Partij voor de Utrechtse Student",
+      "logo": "pvdus.png",
+      "answers": [
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Tuition fees help fund innovation and cutting-edge programs.",
+            "nl": "Collegegeld helpt innovatie en vooruitstrevende programma’s te financieren."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Structured attendance improves outcomes and accountability.",
+            "nl": "Gestructureerde aanwezigheid verbetert resultaten en verantwoordelijkheid."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Sustainability investments can drive innovation and attract funding.",
+            "nl": "Investeringen in duurzaamheid kunnen innovatie stimuleren en financiering aantrekken."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Exams are efficient and scalable for evaluating large student groups.",
+            "nl": "Tentamens zijn efficiënt en schaalbaar voor het beoordelen van grote groepen studenten."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Strong ties with industry prepare students for the job market.",
+            "nl": "Sterke banden met het bedrijfsleven bereiden studenten voor op de arbeidsmarkt."
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Student Coalition Utrecht",
+      "logo": "scu.jpg",
+      "answers": [
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Tuition fees help fund innovation and cutting-edge programs.",
+            "nl": "Collegegeld helpt innovatie en vooruitstrevende programma’s te financieren."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Structured attendance improves outcomes and accountability.",
+            "nl": "Gestructureerde aanwezigheid verbetert resultaten en verantwoordelijkheid."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Sustainability investments can drive innovation and attract funding.",
+            "nl": "Investeringen in duurzaamheid kunnen innovatie stimuleren en financiering aantrekken."
+          }]
+        },
+        {
+          "answer": -2,
+          "explanation": [{
+            "en": "Exams are efficient and scalable for evaluating large student groups.",
+            "nl": "Tentamens zijn efficiënt en schaalbaar voor het beoordelen van grote groepen studenten."
+          }]
+        },
+        {
+          "answer": 2,
+          "explanation": [{
+            "en": "Strong ties with industry prepare students for the job market.",
+            "nl": "Sterke banden met het bedrijfsleven bereiden studenten voor op de arbeidsmarkt."
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Academisch Belang Utrecht",
+      "logo": "abu.webp",
       "answers": [
         {
           "answer": -2,

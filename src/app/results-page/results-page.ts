@@ -1,5 +1,5 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { Answer, answer_possibilities, is_explanation_part, ThesisText } from '../model';
+import { Answer, answer_possibilities, is_explanation_part, ThesesData, ThesisText } from '../model';
 import _ from "lodash";
 import { ThesesService } from '../theses-service';
 import { parties, theses } from "../theses.json";
@@ -7,12 +7,12 @@ import { ThesisText as ThesisTextComponent } from '../theses-page/thesis-text/th
 import { faCheckCircle, faChevronDown, faChevronUp, faCircleInfo, faExclamation, faMinus, faTrophy, faXmarkCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LocalisedPipe, LocalisedText } from '../localised-pipe';
-import { NgClass } from "@angular/common";
+import { NgClass, NgOptimizedImage } from "@angular/common";
 import { Localisation } from '../localisation';
 
 @Component({
   selector: 'app-results-page',
-  imports: [FontAwesomeModule, ThesisTextComponent, LocalisedPipe, NgClass],
+  imports: [FontAwesomeModule, ThesisTextComponent, LocalisedPipe, NgClass, NgOptimizedImage],
   templateUrl: './results-page.html',
   styleUrl: './results-page.css',
 })
@@ -47,7 +47,7 @@ export class ResultsPage {
   sorted_parties = computed(() => {
     const own_answers = this.theses_service.own_answers();
 
-    return _.chain(parties)
+    return _.chain(parties as ThesesData["parties"])
       .map(party => {
         const answer_scores = party.answers.map(ans => ans.answer) as (-2 | -1 | 1 | 2)[];
         const own_scores = own_answers.map(answer => answer.answer) as Answer[];
@@ -81,7 +81,7 @@ export class ResultsPage {
       return { classes: "text-red", icon: faXmarkCircle };
   }
 
-  answer_text(answer: number) {
+  answer_text(answer: number | null) {
     return answer_possibilities.find(poss => poss.answer === answer)!.text;
   }
 
@@ -105,11 +105,12 @@ export class ResultsPage {
     good_to_know: { nl: "Goed om te weten", en: "Good to know" },
     good_to_know_text: { nl: "Deze stemwijzer behandelt een beperkt aantal stellingen. Het is daarom aan te raden om ook de websites en andere kanalen van de deelnemende partijen te bekijken voor een breder beeld van hun standpunten en prioriteiten. Deze zijn hierboven te vinden onder elk van de uitslagen van de partijen.", en: "This election compass covers a limited number of theses. We therefore recommend that you also consult the websites and other channels of the participating parties to gain a broader picture of their positions and priorities. These can be found above, under each of the parties’ results." },
     disclaimer_text: { nl: "Deze stemwijzer is gemaakt door de Universiteitsraad van de Universiteit Utrecht. Zie de uitkomst vooral als een hulpmiddel, niet als een definitief stemadvies. Kijk voor meer informatie over de verkiezingen op ", en: "This election compass has been created by the University Council of Utrecht University. Please regard the results primarily as a tool, not as definitive voting advice. For more information about the elections, visit " },
-    best_match: { nl: "Grootste overeenkomst", en: "Best match" }
+    best_match: { nl: "Grootste overeenkomst", en: "Best match" },
+    answers: { nl: "antwoorden op de stellingen", en: "answers to the theses" }
   }
 
-  parties = parties;
-  theses = theses;
+  parties = parties as ThesesData["parties"];
+  theses = theses as ThesesData["theses"];
   faChevronDown = faChevronDown;
   faChevronUp = faChevronUp;
   faExclamation = faExclamation;
