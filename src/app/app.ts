@@ -2,10 +2,11 @@ import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Localisation } from './localisation';
 import { LocalisedPipe, LocalisedText } from './localised-pipe';
+import { NgOptimizedImage } from "@angular/common";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, LocalisedPipe],
+  imports: [RouterOutlet, LocalisedPipe, NgOptimizedImage],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })

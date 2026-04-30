@@ -1,6 +1,9 @@
 <div class="min-h-screen flex flex-col">
   <nav class="bg-[#FFCD00] px-6 py-4 border-b border-neutral-300 flex flex-row justify-between">
-    <h1 class="font-bold text-xl md:text-2xl">{{ texts['title'] | localised }}</h1>
+    <div class="flex flex-row">
+      <img class="hidden sm:inline-block mr-2 my-auto w-7 h-7" ngSrc="uu.png" alt="UU logo" width="28" height="28">
+      <h1 class="inline-block my-auto font-bold text-xl md:text-2xl">{{ texts['title'] | localised }}</h1>
+    </div>
     <button class="cursor-pointer hover:underline" (click)="toggle_language()">
       @if (localisation.current_language() === 'nl') {
         EN
