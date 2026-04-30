@@ -11,14 +11,22 @@
 
   <ol class="flex flex-col gap-y-4">
     @for (party of sorted_parties(); track $index) {
+      @let is_winner = percentage(party.similarity) === percentage(highest_similarity());
       <li>
         <div class="flex flex-row border border-neutral-200 gap-x-4 items-stretch min-h-12">
           <div class="w-12 bg-[#66718c] grid">
             <span class="block m-auto font-bold text-white">{{ $index + 1 }}</span>
           </div>
-          <span class="my-auto w-full">
-            {{ party.name }} ({{ percentage(party.similarity) }}% {{ texts['match'] | localised }})
-          </span>
+          <div class="my-auto w-full flex flex-row justify-between gap-x-1">
+            <div>
+              <h3 [class.font-bold]="is_winner">{{ party.name }}</h3>
+              <span class="text-gray-600">{{ percentage(party.similarity) }}% {{ texts['match'] | localised }}</span>
+            </div>
+            @if (is_winner) {
+              <fa-icon class="text-yellow-300 my-auto text-2xl" [icon]="faTrophy" />
+              <span class="sr-only">{{ texts['best_match'] | localised }}</span>
+            }
+          </div>
           <span class="w-12 bg-[#66718c] grid cursor-pointer" (click)="toggle_explanation($index)">
             <fa-icon class="m-auto text-white" [icon]="opened()[$index] ? faChevronUp : faChevronDown" />
           </span>
@@ -44,7 +52,6 @@
                       }
                       <fa-icon [class.w-2]="own_answer.important" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" />
                     </div>
-                    <!-- <fa-icon class="md:hidden block m-auto" [ngClass]="{ 'text-green-400': icon.classes === 'text-green', 'text-red-400': icon.classes === 'text-red' }" [icon]="icon.icon" /> -->
                     <app-thesis-text [text]="thesis" />
                   </div>
                   <hr class="border-neutral-200">
